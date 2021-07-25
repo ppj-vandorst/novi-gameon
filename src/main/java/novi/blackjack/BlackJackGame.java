@@ -15,7 +15,7 @@ public class BlackJackGame {
         this.inputScanner = inputScanner;
     }
 
-    public void startGame() throws InterruptedException {
+    public void playGame() throws InterruptedException {
         gameIsRunning = true;
         currentValue = 0;
 
