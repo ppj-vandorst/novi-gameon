@@ -11,8 +11,10 @@ public class Player {
     public void performMove(Deck deck, String move) {
         if (move.equals("hit")) {
             this.hand.addCard(deck.getNextCard());
+            System.out.println("You hit!\n");
         } else if (move.equals("stay")) {
             this.staying = true;
+            System.out.println("You stay!\n");
         }
     }
 

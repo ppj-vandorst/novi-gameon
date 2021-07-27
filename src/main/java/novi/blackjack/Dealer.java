@@ -11,7 +11,9 @@ public class Dealer {
     public void performMove(Deck deck) {
         if (hand.getTotalValue() < 17) {
             hand.addCard(deck.getNextCard());
+            System.out.println("The dealer hits!\n");
         } else {
+            System.out.println("The dealer stays!\n");
             this.staying = true;
         }
     }
