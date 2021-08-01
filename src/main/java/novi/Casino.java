@@ -28,7 +28,7 @@ public class Casino {
     }
 
     public void start() {
-        System.out.println("\n$$$ Welcome to casino the Golden Triangle! $$$\n");
+        Printer.printTitle("\n$$$ Welcome to casino the Golden Triangle! $$$\n");
 
         while (true) {
             System.out.println("Press p to start a game or q to quit");
@@ -89,10 +89,10 @@ public class Casino {
         this.coins = this.coins + winnings;
 
         if (winnings >= 0) {
-            System.out.printf("You won %d coins\n", winnings);
+            Printer.printGreen("You won %d coins", winnings);
         } else {
-            System.out.printf("You lost %d coins\n", -winnings);
+            Printer.printRed("You lost %d coins", -winnings);
         }
-        System.out.printf("You now have %d coins\n\n", coins);
+        Printer.printGreen("You now have %d coins\n", coins);
     }
 }
