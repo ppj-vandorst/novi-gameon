@@ -3,7 +3,7 @@ package novi.blackjack;
 import java.util.Scanner;
 
 public class LowDeckBlackjack extends BlackjackGame {
-    int currentValue;
+
 
     public LowDeckBlackjack(Scanner inputScanner) {
         super(inputScanner, new LowDeck());
@@ -15,12 +15,14 @@ public class LowDeckBlackjack extends BlackjackGame {
         if (player.isBust() || player.isStaying() && player.getHandValue() <= dealer.getHandValue()) {
             System.out.println("You lost!");
             gameIsRunning = false;
+            gameIsWon = false;
             return;
         }
 
         if (dealer.isBust() || dealer.isStaying() && player.getHandValue() > dealer.getHandValue()) {
             System.out.println("You won!");
             gameIsRunning = false;
+            gameIsWon = true;
             return;
         }
 
@@ -41,8 +43,6 @@ public class LowDeckBlackjack extends BlackjackGame {
 
             if (input.equals("hit") || input.equals("stay")) {
                 return input;
-            } else {
-                continue;
             }
         }
     }
@@ -62,5 +62,10 @@ public class LowDeckBlackjack extends BlackjackGame {
     public void renderRules() {
         super.renderRules();
         System.out.println("	- In this variant of Blackjack only low cards are used!\n\n");
+    }
+
+    @Override
+    public String getName() {
+        return "Low Deck BlackJack";
     }
 }

@@ -3,8 +3,6 @@ package novi.blackjack;
 import java.util.Scanner;
 
 public class SimpleBlackjack extends BlackjackGame {
-    int currentValue;
-
     public SimpleBlackjack(Scanner inputScanner) {
         super(inputScanner, new SimpleDeck());
     }
@@ -41,8 +39,6 @@ public class SimpleBlackjack extends BlackjackGame {
 
             if (input.equals("hit") || input.equals("stay")) {
                 return input;
-            } else {
-                continue;
             }
         }
     }
@@ -58,7 +54,9 @@ public class SimpleBlackjack extends BlackjackGame {
         System.out.println("");
     }
 
-    public void renderRules() {
-
+    @Override
+    public String getName() {
+        return "BlackJack";
     }
+
 }

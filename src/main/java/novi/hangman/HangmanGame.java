@@ -1,16 +1,18 @@
 package novi.hangman;
 
+import novi.Game;
 import novi.hangman.exceptions.DuplicateLetterException;
 
 import java.util.*;
 
-public class HangmanGame {
+public class HangmanGame implements Game {
     private static List<String> WORDS = List.of("funny", "subway", "uptown", "beekeeper", "buffalo", "buzzard",
             "jackpot", "ivy", "strength", "zipper", "whiskey", "kiosk");
 
     private Scanner inputScanner;
-    private ImageFactory imageFactory = new ImageFactory();
-    private boolean gameRunning = false;
+    private ImageFactory imageFactory;
+    private boolean gameRunning;
+    private boolean gameIsWon;
     private String wordToGuess;
     private String guessState;
     private List<Character> guessedLetters;
@@ -21,16 +23,18 @@ public class HangmanGame {
         this.inputScanner = inputScanner;
     }
 
-    public void playGame() {
+    public void playGame(int coins) {
         this.gameRunning = true;
+        this.gameIsWon = false;
 
         this.wordToGuess = WORDS.get(new Random().nextInt(WORDS.size()));
         this.guessState = "*".repeat(this.wordToGuess.length());
         this.guessedLetters = new ArrayList<>();
         this.numberOfWrongGuesses = 0;
 
-        System.out.println("You started a game of Hangman, fill in a letter to start guessing");
+        printRules();
 
+        System.out.println("Fill in a letter to start guessing");
         while (this.gameRunning) {
             if (inputScanner.hasNextLine()) {
                 String guess = inputScanner.nextLine();
@@ -44,10 +48,10 @@ public class HangmanGame {
         }
     }
 
-    public void applyGuess(String guess) {
+    private void applyGuess(String guess) {
         var wrongGuessMessage = "";
 
-        if (guess.length() > 1) {
+        if (guess.length() != 1) {
             System.out.println("You can only type letters!");
             return;
         }
@@ -75,6 +79,7 @@ public class HangmanGame {
             if (guessState.equals(wordToGuess)) {
                 System.out.printf("Correct! the word was %s, you won!\n", wordToGuess);
                 gameRunning = false;
+                gameIsWon = true;
             }
 
             return;
@@ -110,7 +115,27 @@ public class HangmanGame {
         return indices;
     }
 
-    public boolean isGameRunning() {
-        return this.gameRunning;
+    private void printRules() {
+        System.out.println("Welcome to Hangman!\n\n");
+        System.out.println(" RULES: ");
+        System.out.println("	- Each game costs 50 tokens");
+        System.out.println("	- Your goal is to guess the word before running out of turns");
+        System.out.println("	- when you guess the word correctly you win 250 coins");
+        System.out.println("	- when you don't guess the word you lose");
+    }
+
+    @Override
+    public String getName() {
+        return "Hangman";
+    }
+
+    @Override
+    public int getMinimalRequiredCoins() {
+        return 50;
+    }
+
+    @Override
+    public int getWinnings() {
+        return gameIsWon ? 250 : -50;
     }
 }
