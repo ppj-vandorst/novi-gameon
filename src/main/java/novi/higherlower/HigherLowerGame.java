@@ -3,18 +3,20 @@ package novi.higherlower;
 import java.util.Scanner;
 
 import novi.Game;
+import novi.randomGenerator.IRandomGenerator;
 
 public class HigherLowerGame implements Game {
     private Scanner inputScanner;
+    private IRandomGenerator randomGenerator;
+
     private boolean gameIsRunning;
-    private boolean gameIsWon;
 
     private int numberToGuess;
     private int numberOfTurns;
-    private int startCoins;
 
-    public HigherLowerGame(Scanner inputScanner) {
+    public HigherLowerGame(Scanner inputScanner, IRandomGenerator randomGenerator) {
         this.inputScanner = inputScanner;
+        this.randomGenerator = randomGenerator;
     }
 
     @Override
@@ -29,29 +31,24 @@ public class HigherLowerGame implements Game {
 
     public void playGame(int coins) {
         gameIsRunning = true;
-        gameIsWon = false;
-        numberToGuess = (int) (Math.random() * 100);
+        numberToGuess = randomGenerator.randomInt(100);
         numberOfTurns = 0;
-        this.startCoins = coins;
 
         printRules();
         while (gameIsRunning) {
             System.out.println("Make a guess");
 
-            if (inputScanner.hasNextInt()) {
-                performGuess(inputScanner.nextInt());
-            } else {
-                System.out.println("That is not a number");
-            }
+
+            var val = inputScanner.nextInt();
+            performGuess(val);
         }
     }
 
-    public void performGuess(int guess) {
+    private void performGuess(int guess) {
         numberOfTurns++;
 
         if (guess == numberToGuess) {
             gameIsRunning = false;
-            gameIsWon = true;
             System.out.printf("Correct! you guessed the number in %d turns\n", numberOfTurns);
         } else if (guess > numberToGuess) {
             System.out.println("That number is too high");
@@ -71,7 +68,7 @@ public class HigherLowerGame implements Game {
         return 0;
     }
 
-    public void printRules() {
+    private void printRules() {
         System.out.println("Welcome to Higher Lower!\n\n");
         System.out.println(" RULES: ");
         System.out.println("	- Each game costs 5 tokens");
@@ -84,6 +81,6 @@ public class HigherLowerGame implements Game {
 
     @Override
     public int getWinnings() {
-        return calculateWinnings();
+        return calculateWinnings() - 5;
     }
 }

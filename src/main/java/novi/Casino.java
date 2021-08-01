@@ -8,6 +8,7 @@ import novi.blackjack.LowDeckBlackjack;
 import novi.blackjack.SimpleBlackjack;
 import novi.hangman.HangmanGame;
 import novi.higherlower.HigherLowerGame;
+import novi.randomGenerator.RandomGenerator;
 import novi.slotmachines.SlotMachineGame;
 
 public class Casino {
@@ -18,7 +19,7 @@ public class Casino {
     public Casino(Scanner inputScanner) {
         this.inputScanner = inputScanner;
         this.games = new ArrayList<>();
-        this.games.add(new HigherLowerGame(inputScanner));
+        this.games.add(new HigherLowerGame(inputScanner, new RandomGenerator()));
         this.games.add(new LowDeckBlackjack(inputScanner));
         this.games.add(new SimpleBlackjack(inputScanner));
         this.games.add(new SlotMachineGame(inputScanner));
