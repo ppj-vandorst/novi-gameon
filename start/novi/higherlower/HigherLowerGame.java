@@ -11,6 +11,17 @@ public class HigherLowerGame {
     }
 
     public void playGame() {
-        // The game logic goes here
+        gameIsRunning = true;
+
+        // Here you should generate the number to guess
+
+        while (gameIsRunning) {
+            System.out.println("Make a guess");
+
+            var guess = inputScanner.nextInt();
+            System.out.printf("Your guess is: %d\n", guess);
+
+            // Check if the guess is correct, if so end the game
+        }
     }
 }
