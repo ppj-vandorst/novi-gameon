@@ -63,7 +63,7 @@ public class ImageFactory {
             )
     );
 
-    public List<String> getImage(int index) {
+    public static List<String> getImage(int index) {
         return IMAGES.get(index);
     }
 }

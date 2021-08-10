@@ -18,8 +18,8 @@ public class HigherLowerGame {
         while (gameIsRunning) {
             System.out.println("Make a guess");
 
-            var guess = inputScanner.nextInt();
-            System.out.printf("Your guess is: %d\n", guess);
+            var input = inputScanner.nextLine();
+            System.out.printf("You typed: %s", input);
 
             // Check if the guess is correct, if so end the game
         }

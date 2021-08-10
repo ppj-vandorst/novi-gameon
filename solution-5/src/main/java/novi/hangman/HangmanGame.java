@@ -17,7 +17,6 @@ public class HangmanGame {
     private int numberOfWrongGuesses;
 
     public HangmanGame(Scanner inputScanner) {
-        this.imageFactory = new ImageFactory();
         this.inputScanner = inputScanner;
     }
 
@@ -88,7 +87,7 @@ public class HangmanGame {
             gameRunning = false;
         }
 
-        var hangmanImage = imageFactory.getImage(this.numberOfWrongGuesses);
+        var hangmanImage = ImageFactory.getImage(this.numberOfWrongGuesses);
 
         for (String imageLine : hangmanImage) {
             System.out.println(imageLine);
